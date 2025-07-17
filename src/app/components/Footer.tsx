@@ -1,11 +1,17 @@
+"use client";
+
 import React from "react";
+import { useHomePage } from "../HomePageContext";
+import Image from "next/image";
 
-const Footer = () => (
-  <footer className="w-full bg-gray-800 text-white py-4 px-8 text-center mt-auto">
-    <p>
-      &copy; {new Date().getFullYear()} Meu Site. Todos os direitos reservados.
-    </p>
-  </footer>
-);
+export default function Footer() {
+  const { infos, loading } = useHomePage();
 
-export default Footer;
+  if (loading) return <div>Carregando...</div>;
+
+  return (
+    <footer>
+      <Image width={100} height={50} src={infos.settings.logo_footer} />
+    </footer>
+  );
+}
