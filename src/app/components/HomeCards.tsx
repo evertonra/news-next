@@ -13,6 +13,7 @@ interface Infos {
   contents: InfoItem[];
   title: string; // Nome da categoria, ex: "Economia"
   color: string; // Cor da categoria, ex: "text-green-500"
+  font_in_home: string; // Cor da fonte para o título na home
 }
 
 export type { Infos };
@@ -54,7 +55,7 @@ export default function HomeCards({ infos }: { infos: Infos }) {
               {/* Marcador colorido */}
               <div
                 className="absolute top-0 left-0 w-6 h-3 rounded-ss-lg"
-                style={{ backgroundColor: infos.color }}
+                style={{ backgroundColor: infos.font_in_home }}
               />
 
               {/* Imagem */}
