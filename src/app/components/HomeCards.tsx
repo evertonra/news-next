@@ -15,6 +15,8 @@ interface Infos {
   color: string; // Cor da categoria, ex: "text-green-500"
 }
 
+export type { Infos };
+
 export default function HomeCards({ infos }: { infos: Infos }) {
   const [main, ...others] = infos.contents;
   console.log("infos", infos);
@@ -52,7 +54,7 @@ export default function HomeCards({ infos }: { infos: Infos }) {
               {/* Marcador colorido */}
               <div
                 className="absolute top-0 left-0 w-6 h-3 rounded-ss-lg"
-                style={{ backgroundColor: infos.font_in_home }}
+                style={{ backgroundColor: infos.color }}
               />
 
               {/* Imagem */}

@@ -7,7 +7,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
-  const { infos, loading } = useHomePage();
+  const { infos, loading } = useHomePage() as unknown as {
+    infos: {
+      settings: { logo: string };
+      pages: { name: string; id: string }[];
+    };
+    loading: boolean;
+  };
   const pathname = usePathname();
 
   if (loading) return <div>Carregando...</div>;
@@ -22,28 +28,35 @@ export default function Header() {
   return (
     <header>
       <div className="bg-blue-950 h-24 w-full px-[5%] md:px-[10%] flex items-center justify-between">
-        <Image width={100} height={50} src={infos.settings.logo} />
+        <Image
+          width={100}
+          height={50}
+          src={infos.settings.logo}
+          alt="Logo do cabeçalho"
+        />
         <div>
           <ul className="flex gap-6">
-            {infos.pages.map((page, index) => {
-              const isHome =
-                slugify(page.name) === "inicio" ||
-                slugify(page.name) === "home";
-              const href = isHome ? "/" : `/${slugify(page.name)}/${page.id}`;
-              const isActive = pathname === href;
+            {infos.pages.map(
+              (page: { name: string; id: string }, index: number) => {
+                const isHome =
+                  slugify(page.name) === "inicio" ||
+                  slugify(page.name) === "home";
+                const href = isHome ? "/" : `/${slugify(page.name)}/${page.id}`;
+                const isActive = pathname === href;
 
-              return (
-                <li key={index}>
-                  <Link
-                    className={`text-white cursor-pointer text-[18px] font-[400] ${
-                      isActive ? "border-b-2 border-white" : ""
-                    }`}
-                    href={href}>
-                    {page.name}
-                  </Link>
-                </li>
-              );
-            })}
+                return (
+                  <li key={index}>
+                    <Link
+                      className={`text-white cursor-pointer text-[18px] font-[400] ${
+                        isActive ? "border-b-2 border-white" : ""
+                      }`}
+                      href={href}>
+                      {page.name}
+                    </Link>
+                  </li>
+                );
+              }
+            )}
           </ul>
         </div>
       </div>
