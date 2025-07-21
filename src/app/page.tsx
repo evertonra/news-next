@@ -5,22 +5,27 @@ import HomeCards from "./components/HomeCards";
 
 export default function Home() {
   const { infos, loading } = useHomePage() as unknown as {
-    infos: any;
+    infos: object;
     loading: boolean;
   };
-  console.log("infos", infos.home);
+  if (infos && infos.home) {
+    console.log("infos", infos.home);
+  }
   return (
     <div className="w-full min-h-screen">
       {loading ? (
         <div>Carregando dados da home...</div>
       ) : (
-        <section className="w-full px-[5%] md:px-[10%] ">
-          <div className="flex flex-col w-full gap-8">
+        <section className="w-full px-[5%] md:px-[10%] mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-8">
             {infos?.home?.map((item: any, idx: number) => (
-              <div className="flex flex-col gap-4">
-                <h2 className="text-black text-[30px] font-bold">
+              <div className="flex flex-col gap-4 ">
+                <h2
+                  className="text-3xl font-bold"
+                  style={{ color: item.font_in_home }}>
                   {item.name}
                 </h2>
+
                 <HomeCards key={idx} infos={item} />
               </div>
             ))}
