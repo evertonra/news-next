@@ -14,6 +14,7 @@ interface Infos {
   title: string; // Nome da categoria, ex: "Economia"
   color: string; // Cor da categoria, ex: "text-green-500"
   font_in_home: string; // Cor da fonte para o título na home
+  name: string; // Nome da categoria, usado em page.tsx
 }
 
 export type { Infos };
